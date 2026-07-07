@@ -1,59 +1,87 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Student Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple CRUD (Create, Read, Update, Delete) web application built with Laravel to manage student records. Built as a hands-on learning project to strengthen Laravel fundamentals.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Add new students with form validation
+- View a list of all students
+- View individual student details
+- Edit/update existing student records
+- Delete student records
+- Server-side validation (required fields, unique roll number/email, enum-restricted gender field)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend:** Laravel 12
+- **Database:** SQLite
+- **Frontend:** Blade templating engine, HTML/CSS
+- **Tools:** XAMPP, VS Code, Git
 
-## Learning Laravel
+## Database Schema
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+The `students` table includes:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Field | Type | Notes |
+|---|---|---|
+| id | bigint | Primary key, auto-increment |
+| name | string | |
+| roll_number | string | Unique |
+| email | string | Unique |
+| phone | string | |
+| address | string | |
+| gender | enum | Male / Female / Other |
+| course | string | |
+| enrollment_date | date | |
+| created_at / updated_at | timestamp | Auto-managed by Laravel |
 
-## Laravel Sponsors
+## Routes
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+| Method | URI | Action |
+|---|---|---|
+| GET | /students | List all students |
+| GET | /students/create | Show create form |
+| POST | /students | Store new student |
+| GET | /students/{id} | Show student details |
+| GET | /students/{id}/edit | Show edit form |
+| PUT/PATCH | /students/{id} | Update student |
+| DELETE | /students/{id} | Delete student |
 
-### Premium Partners
+## Installation / Running Locally
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+1. Clone the repository
+    git clone https://github.com/aakriti61/student-management.git
+    cd student-management
 
-## Contributing
+2. Install dependencies
+    composer install
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Copy the environment file and generate an app key
+    copy .env.example .env
+    php artisan key:generate
 
-## Code of Conduct
+4. Create the SQLite database file
+    New-Item database\database.sqlite -ItemType File
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. Run migrations
+    php artisan migrate
 
-## Security Vulnerabilities
+6. Start the development server
+    php artisan serve
+    
+7. Visit `http://127.0.0.1:8000/students` in your browser
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## What I Learned
 
-## License
+- Laravel's MVC structure (Models, Views, Controllers)
+- Eloquent ORM for database interaction
+- Database migrations for version-controlled schema
+- Blade templating (`@foreach`, `@if`, `{{ }}` escaping)
+- RESTful resource routing
+- Form validation and CSRF protection
+- Mass assignment protection using `$fillable`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Author
+
+Aakriti Simkhada
+[aakriti206105@gmail.com](mailto:aakriti206105@gmail.com)
